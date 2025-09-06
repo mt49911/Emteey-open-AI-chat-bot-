@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emteey AI - Profile</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 🔹 Topbar -->
+  <div class="topbar">
+    <h2>Emteey AI</h2>
+    <nav>
+      <a href="index.html">💬 Chat</a>
+      <a href="history.html">📜 History</a>
+      <a href="profile.html" class="active">👤 Profile</a>
+    </nav>
+  </div>
+
+  <div class="container">
+    <!-- 🔹 Sidebar -->
+    <div class="sidebar">
+      <a href="profile.html" class="active">👤 Profile</a>
+      <a href="history.html">📜 History</a>
+    </div>
+
+    <!-- 🔹 Profile Form -->
+    <div class="main">
+      <h1>User Profile</h1>
+      <form id="profileForm">
+        <label>Name:</label>
+        <input type="text" id="username" placeholder="Enter your name" />
+
+        <label>Email:</label>
+        <input type="email" id="email" placeholder="Enter your email" />
+
+        <button type="button" onclick="saveProfile()">Save</button>
+      </form>
+      <div id="saved"></div>
+    </div>
+  </div>
+
+  <script>
+    window.onload = () => {
+      const user = JSON.parse(localStorage.getItem("userProfile") || "{}");
+      if (user.name) document.getElementById("username").value = user.name;
+      if (user.email) document.getElementById("email").value = user.email;
+    };
+
+    function saveProfile() {
+      const name = document.getElementById("username").value;
+      const email = document.getElementById("email").value;
+      localStorage.setItem("userProfile", JSON.stringify({ name, email }));
+      document.getElementById("saved").innerText = "Profile saved!";
+    }
+  </script>
+</body>
+</html>

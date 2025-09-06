@@ -1,0 +1,150 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f5f5f5;
+}
+
+/* 🔹 Top bar */
+.topbar {
+  background: #202123;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+}
+
+.topbar h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.menu-btn {
+  font-size: 24px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: white;
+}
+
+/* 🔹 Sidebar (hidden by default) */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -220px;
+  width: 200px;
+  height: 100%;
+  background: #343541;
+  color: white;
+  padding-top: 60px;
+  transition: left 0.3s ease;
+}
+
+.sidebar a {
+  display: block;
+  padding: 12px;
+  text-decoration: none;
+  color: #ddd;
+}
+
+.sidebar a:hover {
+  background: #202123;
+  color: #fff;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+/* 🔹 Main content */
+.container {
+  padding: 20px;
+}
+
+.chat-box {
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  height: 70vh;
+  overflow-y: auto;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.msg {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 80%;
+}
+
+.user {
+  background: #007bff;
+  color: white;
+  margin-left: auto;
+}
+
+.bot {
+  background: #d1d5db;
+  color: black;
+  margin-right: auto;
+}
+
+.input-box {
+  display: flex;
+  margin-top: 10px;
+}
+
+.input-box input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px 0 0 8px;
+}
+
+.input-box button {
+  padding: 10px 20px;
+  border: none;
+  background: #343541;
+  color: white;
+  cursor: pointer;
+  border-radius: 0 8px 8px 0;
+}
+
+/* 🔹 Auth forms */
+.auth-form {
+  background: white;
+  padding: 20px;
+  max-width: 400px;
+  margin: 50px auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.auth-form h1 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.auth-form button {
+  width: 100%;
+  padding: 12px;
+  background: #202123;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.auth-form button:hover {
+  background: #10a37f;
+}

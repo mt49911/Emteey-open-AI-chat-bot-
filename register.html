@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Emteey AI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="auth-form">
+    <h1>Register</h1>
+    <input type="text" id="regName" placeholder="Full Name">
+    <input type="email" id="regEmail" placeholder="Email">
+    <input type="password" id="regPassword" placeholder="Password">
+    <button onclick="register()">Register</button>
+    <p>Already have an account? <a href="login.html">Login</a></p>
+  </div>
+
+  <script>
+    function register() {
+      const name = document.getElementById("regName").value;
+      const email = document.getElementById("regEmail").value;
+      const password = document.getElementById("regPassword").value;
+
+      if (!name || !email || !password) {
+        alert("All fields are required");
+        return;
+      }
+
+      localStorage.setItem("userAccount", JSON.stringify({ name, email, password }));
+      alert("Registration successful! Please login.");
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

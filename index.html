@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emteey AI - Chat</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 🔹 Topbar -->
+  <div class="topbar">
+    <h2>Emteey AI</h2>
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  </div>
+
+  <!-- 🔹 Sidebar -->
+  <div id="sidebar" class="sidebar">
+    <a href="profile.html">👤 Profile</a>
+    <a href="history.html">📜 History</a>
+    <a href="#" onclick="logout()">🚪 Logout</a>
+  </div>
+
+  <div class="container">
+    <div id="chat" class="chat-box"></div>
+    <div class="input-box">
+      <input id="msg" type="text" placeholder="Send a message..." />
+      <button onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+
+  <script>
+    // Check login
+    if (localStorage.getItem("loggedIn") !== "true") {
+      window.location.href = "login.html";
+    }
+
+    function toggleMenu() {
+      document.getElementById("sidebar").classList.toggle("active");
+    }
+
+    function logout() {
+      localStorage.removeItem("loggedIn");
+      window.location.href = "login.html";
+    }
+
+    async function sendMessage() {
+      const msgBox = document.getElementById("msg");
+      const chatDiv = document.getElementById("chat");
+
+      const userMessage = msgBox.value.trim();
+      if (!userMessage) return;
+
+      chatDiv.innerHTML += `<div class="msg user"><b>You:</b> ${userMessage}</div>`;
+      msgBox.value = "";
+
+      // Save history
+      let history = JSON.parse(localStorage.getItem("chatHistory") || "[]");
+      history.push({ role: "user", content: userMessage });
+
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: userMessage }),
+      });
+
+      const data = await res.json();
+      chatDiv.innerHTML += `<div class="msg bot"><b>Emteey:</b> ${data.reply}</div>`;
+      chatDiv.scrollTop = chatDiv.scrollHeight;
+
+      history.push({ role: "bot", content: data.reply });
+      localStorage.setItem("chatHistory", JSON.stringify(history));
+    }
+  </script>
+</body>
+</html>

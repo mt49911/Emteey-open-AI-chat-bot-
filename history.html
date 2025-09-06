@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emteey AI - History</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 🔹 Topbar -->
+  <div class="topbar">
+    <h2>Emteey AI</h2>
+    <nav>
+      <a href="index.html">💬 Chat</a>
+      <a href="history.html" class="active">📜 History</a>
+      <a href="profile.html">👤 Profile</a>
+    </nav>
+  </div>
+
+  <div class="container">
+    <!-- 🔹 Sidebar -->
+    <div class="sidebar">
+      <a href="profile.html">👤 Profile</a>
+      <a href="history.html" class="active">📜 History</a>
+    </div>
+
+    <!-- 🔹 History Content -->
+    <div class="main">
+      <h1>Chat History</h1>
+      <div id="history"></div>
+    </div>
+  </div>
+
+  <script>
+    window.onload = () => {
+      const historyDiv = document.getElementById("history");
+      const history = JSON.parse(localStorage.getItem("chatHistory") || "[]");
+
+      if (history.length === 0) {
+        historyDiv.innerHTML = "<p>No history yet.</p>";
+        return;
+      }
+
+      history.forEach(entry => {
+        const msg = document.createElement("div");
+        msg.className = "msg " + (entry.role === "user" ? "user" : "bot");
+        msg.innerHTML = `<b>${entry.role === "user" ? "You" : "Emteey"}:</b> ${entry.content}`;
+        historyDiv.appendChild(msg);
+      });
+    };
+  </script>
+</body>
+</html>
